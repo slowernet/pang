@@ -1,0 +1,3 @@
+- Emit delegated tasks from your Things.app database to the web.
+- Requires you to keep your Things.app Database.xml, which likely contains sensitive information, at a public URL on the web.
+- Requires you to use my fork of the things-rb gem.

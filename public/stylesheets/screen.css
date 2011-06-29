@@ -1,0 +1,136 @@
+body {
+	font-family: 'lucida sans', 'droid sans';
+	line-height: 1.6em;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+a.disabled {
+	color: #ddd;
+}
+
+h1 {
+	font-family: 'droid sans';
+	font-weight: normal;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+/***************************************/
+
+#spinner {
+	position: fixed;
+	right: 1em;
+	top: 46px;
+	height: 16px;
+	width: 16px;
+	background-image: url(http://cdn.cstatic.net/images/spinner.gif);
+}
+
+#menu {
+	position: fixed;
+	right: 1em;
+	top: 11px;
+	font-size: 11px;
+	text-align: right;
+	line-height: 1.4em;
+}
+
+#menu a,
+#menu a:visited {
+	color: #44c;
+}
+
+#main-column {
+	margin: 1em;
+}
+
+/***************************************/
+
+.delegate-task-list h1 {
+	margin: 0 0 16px 0;
+	font-size: 28px;
+}
+
+.delegate-task-list {
+	/*	float: left;*/
+	width: 650px;
+	margin-bottom: 40px;
+}
+
+.delegate-task-list li.task {
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: #e8e8e8;
+	position: relative;
+}
+
+.delegate-task-list li.task .title {
+	background-color: #999;
+	color: white;
+	padding: 0 6px;
+/*	margin-bottom: 5px;*/
+}
+
+.delegate-task-list ul>li .toggle-notes {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	line-height: 1em;
+	padding: 0 3px 1px;
+	background-color: #ccc;
+	vertical-align: middle;
+	color: #888;
+}
+
+.delegate-task-list ul.notes,
+.delegate-task-list .annotation {
+	margin: 0;
+	font-size: 13px;
+	padding-left: 6px;
+}
+
+.delegate-task-list .annotation {
+	position: relative;
+	padding: 0 6px;
+}
+
+.delegate-task-list .annotation .note {
+	width: 608px;
+	color: #a33;
+}
+
+.delegate-task-list .annotation .note input[type=text] {
+	font-size: 13px;
+	margin-left: -6px;
+	padding-left: 3px;
+	width: 600px !important;
+}
+
+.delegate-task-list .annotation .pushed {
+	position: absolute;
+	top: 4px;
+	right: 2px;
+}
+
+#delegate-task-list-default h1 {
+	color: #aaa;
+}
+
+.tooltip {
+	display: none;
+	background-color: #ffe;
+	font-size: 12px;
+	width: 120px;
+	padding: 4px;
+	color: #444;
+	border: 1px solid #ddc;	
+}

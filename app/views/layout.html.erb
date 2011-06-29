@@ -1,0 +1,44 @@
+<!doctype html> 
+<html lang="en"> 
+<head>
+	<meta charset="utf-8">
+
+	<!--[if IE]><![endif]--> <!-- http://j.mp/9GcFnC -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>︗╦╤─</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css'>
+	<link href="/stylesheets/screen.css" type="text/css" rel="stylesheet" media="screen" title="no title" charset="utf-8">
+
+	<script src="/javascripts/head.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+	head.js(
+		"http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js", 
+		"/javascripts/underscore.js",
+		"/javascripts/jquery.jeditable.js",
+		"/javascripts/jquery.storage.js",
+		"/javascripts/jquery.livequery.js",
+		"/javascripts/jquery.tools.tooltip.js",
+		"/javascripts/jquery.linkify.js",
+		"/javascripts/application.js"
+	);
+	</script> 
+	
+	<%= yield_content :page_head %>
+</head>
+<body>
+	<a name="page-top"></a>
+	<div id="spinner" style="display: none;"></div>
+	<div id="menu">
+		<a href='#' id="reload">Hard reload</a><br />
+		<a href='#' id="reload-soft">Soft reload</a>
+	</div>
+	
+	<div id="main-column">
+		<%= yield_content :main_column %>
+	</div>
+	
+	<%= yield_content :page_end %>
+</body>
+</html>

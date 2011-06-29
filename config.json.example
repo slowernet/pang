@@ -1,0 +1,24 @@
+{
+	"default": {
+		"things_db": {
+			"url": ""
+		},
+		"annotation_db": {
+			"name": "",
+			"host": "",
+			"port": ,
+			"username": "",
+			"password": "
+		},
+		"delegate_ids": [
+			""
+		],
+		"default_delegate": {
+			"name": ""
+		}		
+	},
+	"development": {
+	},
+	"production": {
+	}
+}

@@ -1,0 +1,8 @@
+config.json
+Capfile
+*.log
+*.tmp
+.DS_Store
+public/*/_bundle*
+tmp/*
+test/data/dump/*

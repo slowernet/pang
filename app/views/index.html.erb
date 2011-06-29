@@ -1,0 +1,28 @@
+<% content_for :main_column do %>
+	<ul id="delegate-list"></ul>
+
+	<script type="text/html" class="templates" id="delegate-task-list">
+		<div class="delegate-task-list" id="delegate-task-list-#{delegate_id}" data-delegate_id="#{delegate_id}">
+			<h1>#{name}</h1>
+			<ul></ul>
+		</div>
+	</script>
+
+	<script type="text/html" class="templates" id="task">
+		<li class="task" data-task_id="#{task_id}">
+			<div class="title">#{title}</div>
+			<a href="#" class="toggle-notes">&#9662;</a> <!-- &#9656; -->
+			#[ if (notes != null && notes.length > 0) { ]
+				<ul class="notes"><li>#{notes}</li></ul>
+			#[ } ]
+			<div style="display: block;" class="annotation" data-endpoint="/tasks/#{task_id}">
+				<div class="note">#{annotation['note']}</div>
+				<input class="pushed" type="checkbox" #{(annotation['pushed'] == 1) ? 'checked' : ''} title="Check to push back">
+			</div>
+		</li>
+	</script>
+	
+	<script type="text/html">
+	</script>
+<% end %>
+
