@@ -1,3 +1,9 @@
+# pang
+
+gem 'sinatra', '>= 1.2.6'
+gem 'sinatra-respond_to', '>= 0.7'
+gem 'mongo_mapper', '>= 0.9'
+
 begin
 	require 'sinatra'
 rescue LoadError
