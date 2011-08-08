@@ -17,7 +17,6 @@ var Tasks = {
 			data: { 'reload': (hard ? 1 : 0) },
 			success: function(tasks) {
 				ul.empty();
-				dul.empty();
 
 				$(tasks).each(function(i, task) {
 					(task.annotation.pushed ? dul : ul).append(_.template($('.templates#task').html(), task)).linkify();
@@ -29,6 +28,7 @@ var Tasks = {
 	},
 	
 	reload_all: function(hard) {
+		$('div[data-delegate_id="default"] > ul').empty();
 		$('div.delegate-task-list').each(function() {
 			hard = (typeof hard == 'undefined') ? true : hard;
 			if ($(this).data('delegate_id') != 'default') {
