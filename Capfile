@@ -35,7 +35,7 @@ namespace :deploy do
 		# symlink shared directories
 		%w(
 			public/assets
-			config/config.json
+			config.json
 			tmp
 		).each do |path|
 			run "rm -rf #{release_path}/#{path}"
