@@ -1,5 +1,4 @@
 config.json
-Capfile
 *.log
 *.tmp
 .DS_Store
