@@ -36,7 +36,6 @@ namespace :deploy do
 		%w(
 			public/assets
 			config.json
-			tmp
 		).each do |path|
 			run "rm -rf #{release_path}/#{path}"
 			run "ln -sf #{shared_path}/#{path} #{release_path}/#{path}"
