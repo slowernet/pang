@@ -52,52 +52,54 @@ var Task = {
 	}
 }
 
-$(document).ready(function() {
-	
-	$('#reload').click(function() { Tasks.reload_all(true); return false; });
-	$('#reload-soft').click(function() { Tasks.reload_all(false); return false; });
+$script.ready('bundle', function() {
+	$(document).ready(function() {
 
-	$('.toggle-notes').livequery(function() {
-		$(this).click(function() {
-			Task.toggle($(this).parents('li.task'));
-			return false;
-		});
-	});
-	$('li.task').livequery(function() {
-		Task.render_visibility($(this));
-	});
-	
-	$('.annotation').livequery(function() {
-		$(this).find('.note').editable(function(value, settings) {
-			$('#spinner').show();
-			$.post($(this).parents('.annotation').data('endpoint'), { "_method": 'put', "annotation[note]": value }, function(d) {
-				$('#spinner').hide();								
+		$('#reload').click(function() { Tasks.reload_all(true); return false; });
+		$('#reload-soft').click(function() { Tasks.reload_all(false); return false; });
+
+		$('.toggle-notes').livequery(function() {
+			$(this).click(function() {
+				Task.toggle($(this).parents('li.task'));
+				return false;
 			});
-			return value;
-		}, {
-			placeholder: '<span style="color: #aaa">Add a note</span>',
-			height: '19px'
 		});
-		
-		$(this).find('input[type=checkbox]').bind('change', function() {
-			$('#spinner').show();
-			var $that = $(this);
-			$.post($(this).parents('.annotation').data('endpoint'), { "_method": 'put', "annotation[pushed]": (this.checked ? 1 : 0) }, function() {
-				$that.tooltip().hide();
-				Tasks.reload_all(false);
-				$('#spinner').hide();				
+		$('li.task').livequery(function() {
+			Task.render_visibility($(this));
+		});
+
+		$('.annotation').livequery(function() {
+			$(this).find('.note').editable(function(value, settings) {
+				$('#spinner').show();
+				$.post($(this).parents('.annotation').data('endpoint'), { "_method": 'put', "annotation[note]": value }, function(d) {
+					$('#spinner').hide();								
+				});
+				return value;
+			}, {
+				placeholder: '<span style="color: #aaa">Add a note</span>',
+				height: '19px'
 			});
-		}).tooltip({
-			position: 'center right',
-			offset: [0, 4]
+
+			$(this).find('input[type=checkbox]').bind('change', function() {
+				$('#spinner').show();
+				var $that = $(this);
+				$.post($(this).parents('.annotation').data('endpoint'), { "_method": 'put', "annotation[pushed]": (this.checked ? 1 : 0) }, function() {
+					$that.tooltip().hide();
+					Tasks.reload_all(false);
+					$('#spinner').hide();				
+				});
+			}).tooltip({
+				position: 'center right',
+				offset: [0, 4]
+			});
 		});
-	});
-	
-	$.get('/delegates.js', function(delegates) {
-		_.each(delegates, function(d) {
-			$('#delegate-list').append(_.template($('.templates#delegate-task-list').html(), d));
+
+		$.get('/delegates.js', function(delegates) {
+			_.each(delegates, function(d) {
+				$('#delegate-list').append(_.template($('.templates#delegate-task-list').html(), d));
+			});
+			Tasks.reload_all();
 		});
-		Tasks.reload_all();
+
 	});
-	
 });

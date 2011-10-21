@@ -1,23 +1,15 @@
 # pang
 
-gem 'sinatra', '>= 1.2.6'
-gem 'sinatra-respond_to', '>= 0.7'
-gem 'mongo_mapper', '>= 0.9'
-
-begin
-	require 'sinatra'
-rescue LoadError
-	require 'rubygems'
-	require 'sinatra'
-end
-
+require 'rubygems'
+require 'sinatra'
 require 'active_support'; $KCODE = 'u'
 require 'sinatra_more/markup_plugin' # http://github.com/nesquena/sinatra_more
 require 'sinatra/respond_to' # http://github.com/cehoffman/sinatra-respond_to
 require 'open-uri'
 require 'httparty'
 require 'things'
-# require 'sinatra/logger' if development?	# https://github.com/kematzy/sinatra-logger
+require 'json'
+require 'sinatra/reloader' if development?
 require 'mongo_mapper'
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
@@ -30,8 +22,7 @@ Dir.glob("lib/**/*.rb") { |f| load f }
 module Sinatra	
 	register SinatraMore::MarkupPlugin
 	register Sinatra::RespondTo
-
-	register AssetBundler::ViewHelper
+	register Sinatra::Reloader if development?
 end
 
 configure do
@@ -42,9 +33,8 @@ configure do
 	MongoMapper.database.authenticate(CONFIG['annotation_db']['username'], CONFIG['annotation_db']['password'])
 	MongoMapper.handle_passenger_forking
 	
-	THINGS_DB = Things.new(:database => CONFIG['things_db']['url'])
+	THINGS_DB = Things.new(:database => CONFIG['things']['db_url'])
 
-	helpers AssetBundler::ViewHelper	# http://github.com/gbuesing/asset_bundler
 	helpers TextHelpers
 end
 

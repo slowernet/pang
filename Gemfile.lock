@@ -1,0 +1,86 @@
+GIT
+  remote: git://github.com/simon/sinatra-respond_to.git
+  revision: 3fb7e0471ab852a5b382adfc1d32a6ce53f83767
+  specs:
+    sinatra-respond_to (0.8.0)
+      sinatra (~> 1.2)
+
+GIT
+  remote: git@github.com:curbed/sinatra_more.git
+  revision: 342976f28284ff0f92d45016116e98711912b957
+  specs:
+    sinatra_more (0.3.43)
+      activesupport
+      bundler (>= 0.9.2)
+      sinatra (>= 0.9.2)
+      thor (>= 0.11.8)
+      tilt (>= 0.2)
+
+GIT
+  remote: git@github.com:slowernet/things-rb.git
+  revision: 816db1ac01c4d38bd38dfcd2f0b2cbea7fb13979
+  specs:
+    things-rb (0.4.0)
+      hpricot
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activemodel (3.1.1)
+      activesupport (= 3.1.1)
+      builder (~> 3.0.0)
+      i18n (~> 0.6)
+    activesupport (3.1.1)
+      multi_json (~> 1.0)
+    backports (2.3.0)
+    bson (1.4.1)
+    builder (3.0.0)
+    eventmachine (0.12.10)
+    hpricot (0.8.4)
+    httparty (0.8.1)
+      multi_json
+      multi_xml
+    i18n (0.6.0)
+    json (1.6.1)
+    mongo (1.4.1)
+      bson (= 1.4.1)
+    mongo_mapper (0.9.2)
+      activemodel (~> 3.0)
+      activesupport (~> 3.0)
+      plucky (~> 0.3.8)
+    multi_json (1.0.3)
+    multi_xml (0.4.1)
+    plucky (0.3.8)
+      mongo (~> 1.3)
+    rack (1.3.5)
+    rack-protection (1.1.4)
+      rack
+    rack-test (0.6.1)
+      rack (>= 1.0)
+    sinatra (1.3.1)
+      rack (~> 1.3, >= 1.3.4)
+      rack-protection (~> 1.1, >= 1.1.2)
+      tilt (~> 1.3, >= 1.3.3)
+    sinatra-contrib (1.3.1)
+      backports (>= 2.0)
+      eventmachine
+      rack-protection
+      rack-test
+      sinatra (~> 1.3.0)
+      tilt (~> 1.3)
+    thor (0.14.6)
+    tilt (1.3.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport
+  httparty
+  json
+  mongo_mapper (>= 0.9)
+  sinatra (>= 1.3.1)
+  sinatra-contrib (= 1.3.1)
+  sinatra-respond_to (>= 0.8)!
+  sinatra_more!
+  things-rb!

@@ -1,5 +1,5 @@
 before do
-	THINGS_DB = Things.new(:database => CONFIG['things_db']['url']) if ("1" == params[:reload])
+	THINGS_DB = Things.new(:database => CONFIG['things']['db_url']) if ("1" == params[:reload])
 end
 
 get '/?' do
@@ -9,7 +9,7 @@ end
 get '/delegates/?' do
 	delegates = []
 	 Task.delegates.each do |c|
-		delegates << { :delegate_id => c.attributes['id'], :name => c.at('/attribute[@name=title]').inner_text } if CONFIG['delegate_ids'].include?(c.attributes['id'])
+		delegates << { :delegate_id => c.attributes['id'], :name => c.at('/attribute[@name=title]').inner_text } if CONFIG['things']['delegate_ids'].include?(c.attributes['id'])
 	end
 	delegates << { :delegate_id => 'default', :name => CONFIG['default_delegate']['name'] }
 	
