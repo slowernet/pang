@@ -10,7 +10,7 @@ var Tasks = {
 		$('#menu a').addClass('disabled');
 		
 		var ul = $('div[data-delegate_id="' + delegate_id + '"] > ul');
-		var dul = $('div[data-delegate_id="default"] > ul');
+		var dul = $('div[data-delegate_id="pushed"] > ul');
 		
 		$.ajax({
 			url: '/tasks/' + delegate_id + '.js',
@@ -28,10 +28,10 @@ var Tasks = {
 	},
 	
 	reload_all: function(hard) {
-		$('div[data-delegate_id="default"] > ul').empty();
+		$('div[data-delegate_id="pushed"] > ul').empty();
 		$('div.delegate-task-list').each(function() {
 			hard = (typeof hard == 'undefined') ? true : hard;
-			if ($(this).data('delegate_id') != 'default') {
+			if ($(this).data('delegate_id') != 'pushed') {
 				Tasks.reload($(this).data('delegate_id'), hard);
 			}
 		});
@@ -49,7 +49,7 @@ var Task = {
 		var iv = $s.children('.notes,.annotation').toggle().is(':visible');
 		$s.children('.toggle-notes').html(iv ? "&#9662;" : "&#9656;");
 		$.Storage.set('task-notes-visible-' + $s.data('task_id'), (iv ? "1" : "0"));
-	}
+	},
 }
 
 $script.ready('bundle', function() {
@@ -64,6 +64,13 @@ $script.ready('bundle', function() {
 				return false;
 			});
 		});
+		
+		$('#toggle-all-notes').click(function() {
+			$('li.task').each(function() {
+				Task.toggle($(this));
+			});
+		});
+		
 		$('li.task').livequery(function() {
 			Task.render_visibility($(this));
 		});

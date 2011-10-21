@@ -26,4 +26,5 @@ class Task
 			t.merge(:annotation => annotations.find { |a| t['task_id'] == a.task_id } || Annotation.new)
 		end
 	end
+	
 end

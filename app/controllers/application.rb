@@ -11,7 +11,8 @@ get '/delegates/?' do
 	 Task.delegates.each do |c|
 		delegates << { :delegate_id => c.attributes['id'], :name => c.at('/attribute[@name=title]').inner_text } if CONFIG['things']['delegate_ids'].include?(c.attributes['id'])
 	end
-	delegates << { :delegate_id => 'default', :name => CONFIG['default_delegate']['name'] }
+	# delegates << { :delegate_id => 'unassigned', :name => "Unassigned" }
+	delegates << { :delegate_id => 'pushed', :name => CONFIG['pushed']['name'] }
 	
 	respond_to do |wants|
 		wants.js {
