@@ -47,18 +47,14 @@ $script.ready('bundle', function() {
 		$('#reload').click(function() { Tasks.reload(); return false; });
 		// $('#reload-soft').click(function() { Tasks.reload_all(false); return false; });
 
-		$('.toggle-notes').livequery(function() {
-			$(this).click(function() {
-				Task.toggle($(this).parents('li.task'));
-				return false;
-			});
+		$('.toggle-notes').live('click', function() {
+			Task.toggle($(this).parents('li.task'));
+			return false;
 		});
 		
-		$('#toggle-all-notes').livequery(function() {
-			$(this).click(function() {
-				$('li.task').each(function() {
-					Task.toggle($(this));
-				});
+		$('#toggle-all-notes').live('click', function() {
+			$('li.task').each(function() {
+				Task.toggle($(this));
 			});
 		});
 		
