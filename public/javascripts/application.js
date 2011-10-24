@@ -54,9 +54,11 @@ $script.ready('bundle', function() {
 			});
 		});
 		
-		$('#toggle-all-notes').click(function() {
-			$('li.task').each(function() {
-				Task.toggle($(this));
+		$('#toggle-all-notes').livequery(function() {
+			$(this).click(function() {
+				$('li.task').each(function() {
+					Task.toggle($(this));
+				});
 			});
 		});
 		
