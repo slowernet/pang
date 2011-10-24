@@ -4,37 +4,26 @@ _.templateSettings = {
 };
 
 var Tasks = {
-	reload: function(delegate_id, hard) {
-		hard = (typeof hard == 'undefined') ? true : hard;
+	reload: function() {
 		$('#spinner').show();
-		$('#menu a').addClass('disabled');
-		
-		var ul = $('div[data-delegate_id="' + delegate_id + '"] > ul');
-		var dul = $('div[data-delegate_id="pushed"] > ul');
+		$('div.delegate-task-list > ul').empty();
+	
+		var ids = $('div.delegate-task-list').map(function() { return $(this).data('delegate_id') }).get();
 		
 		$.ajax({
-			url: '/tasks/' + delegate_id + '.js',
-			data: { 'reload': (hard ? 1 : 0) },
+			url: '/tasks/' + ids.join(',') + '.js',
 			success: function(tasks) {
-				ul.empty();
+
+				var dul = $('div[data-delegate_id="pushed"] > ul');
 
 				$(tasks).each(function(i, task) {
+					var ul = $('div[data-delegate_id="' + task.delegate_id + '"] > ul');
 					(task.annotation.pushed ? dul : ul).append(_.template($('.templates#task').html(), task)).linkify();
 				});
 				$('#menu a').removeClass('disabled');
 				$('#spinner').hide();
 			}
 		});				
-	},
-	
-	reload_all: function(hard) {
-		$('div[data-delegate_id="pushed"] > ul').empty();
-		$('div.delegate-task-list').each(function() {
-			hard = (typeof hard == 'undefined') ? true : hard;
-			if ($(this).data('delegate_id') != 'pushed') {
-				Tasks.reload($(this).data('delegate_id'), hard);
-			}
-		});
 	}
 }
 
@@ -55,8 +44,8 @@ var Task = {
 $script.ready('bundle', function() {
 	$(document).ready(function() {
 
-		$('#reload').click(function() { Tasks.reload_all(true); return false; });
-		$('#reload-soft').click(function() { Tasks.reload_all(false); return false; });
+		$('#reload').click(function() { Tasks.reload(); return false; });
+		// $('#reload-soft').click(function() { Tasks.reload_all(false); return false; });
 
 		$('.toggle-notes').livequery(function() {
 			$(this).click(function() {
@@ -92,7 +81,7 @@ $script.ready('bundle', function() {
 				var $that = $(this);
 				$.post($(this).parents('.annotation').data('endpoint'), { "_method": 'put', "annotation[pushed]": (this.checked ? 1 : 0) }, function() {
 					$that.tooltip().hide();
-					Tasks.reload_all(false);
+					// Tasks.reload();
 					$('#spinner').hide();				
 				});
 			}).tooltip({
@@ -105,7 +94,7 @@ $script.ready('bundle', function() {
 			_.each(delegates, function(d) {
 				$('#delegate-list').append(_.template($('.templates#delegate-task-list').html(), d));
 			});
-			Tasks.reload_all();
+			Tasks.reload();
 		});
 
 	});

@@ -1,5 +1,4 @@
 before do
-	THINGS_DB = Things.new(:database => CONFIG['things']['db_url']) if ("1" == params[:reload])
 end
 
 get '/?' do
@@ -22,15 +21,32 @@ get '/delegates/?' do
 	end	
 end
 
-get '/tasks/:delegate_id' do
+# get '/tasks/:delegate_id' do
+# 	respond_to do |wants|
+# 		wants.js {
+# 			content_type 'application/json', :charset => 'utf-8'
+# 			Task.delegated_to(params[:delegate_id]).map do |t|
+# 				t['notes'] = simple_format(t['notes'])
+# 				t['annotation']['note'] = simple_format(t['annotation']['note']) unless t['annotation'].nil?
+# 				t
+# 			end.to_json
+# 		}
+# 	end	
+# end
+
+get '/tasks/:delegate_ids' do
+	THINGS_DB = Things.new(:database => CONFIG['things']['db_url'])
+	dids = params[:delegate_ids].split(',').select { |did| did.match(/z[0-9]+/) }
+	tasks = Task.delegated_to(dids).map do |t|
+		t['notes'] = simple_format(t['notes'])
+		t['annotation']['note'] = simple_format(t['annotation']['note']) unless t['annotation'].nil?
+		t
+	end
+	
 	respond_to do |wants|
 		wants.js {
 			content_type 'application/json', :charset => 'utf-8'
-			Task.delegated_to(params[:delegate_id]).map do |t|
-				t['notes'] = simple_format(t['notes'])
-				t['annotation']['note'] = simple_format(t['annotation']['note']) unless t['annotation'].nil?
-				t
-			end.to_json
+			tasks.to_json
 		}
 	end	
 end
